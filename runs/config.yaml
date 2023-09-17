@@ -1,0 +1,18 @@
+# Directories
+run_dir: '/home/talhaarshad/proj/001_mlproject/mlproject/runs'
+data_dir: '/home/talhaarshad/proj/001_mlproject/mlproject/data/datafiles'
+
+# Data
+data_class: 'MNIST'
+data_class_config:
+  num_val: 5000
+  batch_size: 32
+
+# Model
+model_class: 'AutoEncoder'
+model_class_config: {}
+
+# Optimizer
+
+# Training
+

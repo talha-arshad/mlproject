@@ -1,0 +1,14 @@
+# jupyter notebook checkpoints
+**/.ipynb_checkpoints
+
+# data
+**/datafiles
+
+# Scratch 
+*[Ss]cratch*
+
+# Cache
+**/__pycache__
+
+# VSCode
+**/.vscode

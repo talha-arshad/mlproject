@@ -1,6 +1,6 @@
 # Directories
-run_dir: '/home/talhaarshad/proj/001_mlproject/mlproject/runs'
-data_dir: '/home/talhaarshad/proj/001_mlproject/mlproject/data/datafiles'
+run_dir: '~/proj/001_mlproject/mlproject/runs'
+data_dir: '~/proj/001_mlproject/mlproject/data/datafiles'
 
 # Data
 data_class: 'MNIST'

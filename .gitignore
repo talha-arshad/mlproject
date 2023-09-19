@@ -4,6 +4,9 @@
 # data
 **/datafiles
 
+# logs
+**/lightning_logs
+
 # Scratch 
 *[Ss]cratch*
 

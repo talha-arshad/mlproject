@@ -1,18 +1,28 @@
-# Directories
-run_dir: '~/proj/001_mlproject/mlproject/runs'
-data_dir: '~/proj/001_mlproject/mlproject/data/datafiles'
-
 # Data
 data_class: 'MNIST'
 data_class_config:
-  num_val: 5000
+  data_dir: './data/datafiles'
+  val_size: 5000
   batch_size: 32
 
 # Model
-model_class: 'AutoEncoder'
-model_class_config: {}
+model_class: 'CNN'
+model_class_config:
+  conv_channels: !!python/tuple [32, 64]
+  conv_kernel_sizes: !!python/tuple [3, 3]
+  pool_kernel_sizes: !!python/tuple [2, 2]
+  conv_padding: 'valid'
 
 # Optimizer
+optimizer: "Adam" # (from torch.optim)
+lr: 0.001
+loss_fn: "cross_entropy"  # (from torch.nn.functional)
+scheduler: "ExponentialLR" # (null OR from torch.optim.lr_scheduler) "ExponentialLR"
+scheduler_config: {"gamma": 0.9, "verbose": true} # {"gamma": 0.9}
 
 # Training
+log_dir: null
+deterministic: true
+max_epochs: 3
+val_check_interval: 0.25
 

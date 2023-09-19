@@ -5,14 +5,23 @@ from torch.utils.data import random_split, DataLoader
 from torchvision.datasets import MNIST as TorchvisionMNIST
 from torchvision import transforms
 
+INPUT_DIMS = (1, 28, 28)
+OUTPUT_DIMS = (1, )
+MAPPING = list(range(10))
+VAL_SIZE = 5000
+BATCH_SIZE = 32
 
 class MNIST(LightningDataModule):
-    def __init__(self, data_dir: str = "./data/datafiles", num_val=5000, batch_size=32):
+    def __init__(self, data_dir: str = "./data/datafiles", val_size=VAL_SIZE, batch_size=BATCH_SIZE):
         super().__init__()
         self.data_dir = data_dir
         self.transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))])
-        self.num_val = num_val
+        self.val_size = val_size
         self.batch_size = batch_size
+        self.input_dims = INPUT_DIMS
+        self.output_dims = OUTPUT_DIMS
+        self.mapping = MAPPING
+        self.save_hyperparameters()
 
     def prepare_data(self):
         # download
@@ -23,7 +32,7 @@ class MNIST(LightningDataModule):
         # Assign train/val datasets for use in dataloaders
         if stage == "fit":
             full_dataset = TorchvisionMNIST(self.data_dir, train=True, transform=self.transform)
-            self.train_dataset, self.val_dataset = random_split(full_dataset, [len(full_dataset)-self.num_val, self.num_val])
+            self.train_dataset, self.val_dataset = random_split(full_dataset, [len(full_dataset)-self.val_size, self.val_size])
 
         # Assign test dataset for use in dataloader(s)
         if stage == "test":
@@ -49,5 +58,6 @@ def main():
     dm.prepare_data()
     dm.setup(stage="fit")
     print('train_dataset: \n', dm.train_dataset)
+    
 if __name__ == '__main__':
     main()
